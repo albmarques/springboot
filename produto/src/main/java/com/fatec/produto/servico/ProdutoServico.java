@@ -1,5 +1,6 @@
 package com.fatec.produto.servico;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class ProdutoServico implements IProdutoServico {
 	@Override
 	public List<Catalogo> consultaCatalogo() {
 		Catalogo c = null;
+		List<Catalogo> lista = new ArrayList<>();
 		List<Produto> listaP = repositoryP.findAll();
 		List<Imagem> listaI = repositoryI.findAll();
 		for (Produto p : listaP) {
