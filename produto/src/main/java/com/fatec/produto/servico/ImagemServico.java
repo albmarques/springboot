@@ -1,17 +1,21 @@
+package com.fatec.produto.servico;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import com.fatec.produto.model.Imagem;
+
 import com.fatec.produto.model.IImagemRepository;
-import com.fatec.produto.model.Produto;
 import com.fatec.produto.model.IProdutoRepository;
+import com.fatec.produto.model.Imagem;
+import com.fatec.produto.model.Produto;
 
 @Service
 public class ImagemServico implements IImagemServico {
@@ -53,14 +57,16 @@ public class ImagemServico implements IImagemServico {
 
 	@Override
 	public List<Imagem> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return imagemRepository.findAll();
 	}
 
 	@Override
 	public byte[] getImagem(String nomeArquivo) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Imagem> dbImagem = imagemRepository.findByNome(nomeArquivo);
+		if (dbImagem.isPresent())
+			return dbImagem.get().getArquivo();
+		else
+			return new byte[0];
 	}
 
 	@Override
